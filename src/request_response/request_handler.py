@@ -7,6 +7,7 @@ def get_authorization(url):
     except Exception as e:
         print(f"Error fetching {url}: {e}")
 
+
 def post_application(url, token, payload):
     headers = {
         "Authorization": token,
@@ -17,8 +18,10 @@ def post_application(url, token, payload):
         response = requests.post(url, json=payload, headers=headers)
         print("Status Code:", response.status_code)
         print("Response Body:", response.text)
+        return response
     except requests.RequestException as e:
         print(f"Error posting application: {e}")
+
 
 def main():
     get_url = "https://au.mitimes.com/careers/apply/secret"
@@ -44,6 +47,7 @@ def main():
 
     token = get_authorization(get_url)
     post_application(post_url, token, payload)
+
 
 if __name__ == "__main__":
     main()
